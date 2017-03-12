@@ -20,8 +20,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  sinatra
-  thin
+  rack (~> 1.6.5)
+  sinatra (~> 1.4.8)
+  thin (~> 1.7.0)
 
 BUNDLED WITH
    1.14.6
