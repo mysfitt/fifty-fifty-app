@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
+
+    <title>50 / 50 - An example of a modern web application</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3">50 / 50</h1>
+        <p>Fifty fifty is an example application whose sole purpose is to demonstrate how I know a bit about what I'm doing and my coding style. Specifically, the application consists of two parts. A web service that provides the application logic, and the web application that consumes it. The web app is essentially all front end technology and is implemented in Sinatra with bootstrap and jQuery. The web service is written in Rails 5 in API mode [Read: stripped down to the basics] and responds with a random dictionary word, when it responds at all. You see, the reason it's called fifty / fifty is that it only works approximately half of the time. The other half, it throws a 503 unavailable error. The service also requires a HTTP auth token in order to function. Otherwise, it will return a 401 unauthorized.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <p><a id="authreq" class="btn btn-primary btn-lg" href="#" role="button" method="post">Fire Authenticated Request &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <p><a id="unauthreq" class="btn btn-primary btn-lg" href="#" role="button">Fire Unauthenticated Request &raquo;</a></p>
+        </div>
+      </div>
+
+      <div id="main">
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Joss Reeves 2017</p>
+      </footer>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $('#authreq').click(function (event){ 
+        event.preventDefault(); 
+        $.ajax({
+          url: 'http://localhost:3000/fifty_fifty',
+          headers: {
+              'Authorization':'Token token=secret'
+          },
+          method: 'GET',
+          success: function(response){
+            $('#main').html('<h2>' + response + '</h2>');
+          }
+        })
+        return false;
+      });
+      $('#unauthreq').click(function (event){ 
+        event.preventDefault(); 
+        $.ajax({
+          url: 'http://localhost:3000/fifty_fifty',
+          method: 'GET',
+          success: function(response){
+            console.log('word: '+ response);
+          }
+        })
+        return false;
+      });
+
+    </script> 
+  </body>
+</html>
