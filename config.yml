@@ -1,0 +1,9 @@
+development:
+  apihostname: localhost
+  apiport: 3000
+test:
+  apihostname: localhost
+  apiport: 3000
+production:
+  apihostname: ec2-184-72-99-103.compute-1.amazonaws.com
+  apiport: 3000
